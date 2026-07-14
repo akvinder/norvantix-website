@@ -1,6 +1,6 @@
-# Novantrix Website
+# Norvantix Website
 
-Landing page for Novantrix IT Services.
+Landing page for Norvantix IT Services.
 
 ## Deploy
 Static HTML site — no build step required. Deployed via Cloudflare Pages.
