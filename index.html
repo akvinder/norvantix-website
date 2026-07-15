@@ -17,6 +17,8 @@
     --accent:#4FD1C5;
     --accent-dim:#2C7A72;
     --amber:#F5A623;
+    --bg-light:#EEF1F5;
+    --border-light:rgba(13,17,23,0.1);
     --mono:'IBM Plex Mono', monospace;
     --sans:'IBM Plex Sans', sans-serif;
   }
@@ -171,6 +173,12 @@
   }
   .section-sub{color:var(--text-dim); font-size:16px;}
 
+  /* LIGHT SECTION VARIANT — breaks up the dark rhythm, same palette + grey */
+  .section-light{background:var(--bg-light); color:var(--bg);}
+  .section-light .section-eyebrow{color:var(--accent-dim);}
+  .section-light h2{color:var(--bg);}
+  .section-light .section-sub{color:rgba(13,17,23,0.6);}
+
   /* SERVICES */
   .service-groups{display:grid; grid-template-columns:repeat(3, 1fr); gap:1px; background:var(--border); border:1px solid var(--border); border-radius:8px; overflow:hidden;}
   .service-group{background:var(--bg-panel); padding:32px;}
@@ -186,17 +194,34 @@
   }
   .service-item p{font-size:13.5px; color:var(--text-dim); line-height:1.5;}
 
+  .section-light .service-groups{background:var(--border-light); border-color:var(--border-light); box-shadow:0 20px 50px -30px rgba(13,17,23,0.25);}
+  .section-light .service-group{background:#FFFFFF;}
+  .section-light .service-group-label{color:var(--accent-dim); border-bottom-color:var(--border-light);}
+  .section-light .service-item h3{color:var(--bg);}
+  .section-light .service-item p{color:rgba(13,17,23,0.6);}
+
   /* PROCESS */
-  .process{display:grid; grid-template-columns:repeat(3,1fr); gap:32px;}
-  .process-step{position:relative; padding-top:44px;}
+  .process{display:grid; grid-template-columns:repeat(3,1fr); gap:32px; perspective:1200px;}
+  .process-step{position:relative; padding-top:56px;}
   .process-num{
-    font-family:var(--mono); font-size:13px; color:var(--accent);
+    font-family:var(--mono); font-size:16px; font-weight:700; color:var(--bg);
     position:absolute; top:0; left:0;
-    border:1px solid var(--accent-dim); border-radius:4px;
-    width:32px; height:32px; display:flex; align-items:center; justify-content:center;
+    background:var(--accent);
+    border-radius:50%;
+    width:40px; height:40px; display:flex; align-items:center; justify-content:center;
+    box-shadow:0 0 20px -2px rgba(79,209,197,0.55);
   }
   .process-step h3{font-size:17px; font-weight:600; margin-bottom:8px;}
   .process-step p{font-size:14px; color:var(--text-dim);}
+
+  @media (prefers-reduced-motion: no-preference){
+    .process-step.reveal{
+      transform-origin:top center;
+      transform:rotateX(-75deg) translateY(20px);
+      transition:opacity 0.9s cubic-bezier(.34,1.56,.64,1), transform 0.9s cubic-bezier(.34,1.56,.64,1);
+    }
+    .process-step.reveal.in-view{transform:rotateX(0deg) translateY(0);}
+  }
 
   /* TRUST STRIP */
   .trust-strip{
@@ -206,6 +231,10 @@
   .trust-grid{display:grid; grid-template-columns:repeat(4,1fr); gap:24px;}
   .trust-item{font-family:var(--mono); font-size:13px; color:var(--text-dim); display:flex; gap:10px; align-items:flex-start;}
   .trust-item::before{content:'▸'; color:var(--accent); flex-shrink:0;}
+
+  .section-light.trust-strip{border-top-color:var(--border-light); border-bottom-color:var(--border-light);}
+  .section-light .trust-item{color:rgba(13,17,23,0.65);}
+  .section-light .trust-item::before{color:var(--accent-dim);}
 
   /* CTA */
   .cta-section{text-align:center; padding:100px 0;}
@@ -309,7 +338,7 @@
   </div>
 </header>
 
-<section id="services">
+<section id="services" class="section-light">
   <div class="wrap">
     <div class="section-head reveal">
       <div class="section-eyebrow">What we cover</div>
@@ -374,17 +403,17 @@
     </div>
     <div class="process">
       <div class="process-step reveal">
-        <div class="process-num">01</div>
+        <div class="process-num">1</div>
         <h3>Assess</h3>
         <p>We review your current setup — hardware, backups, and network — and quote a clear, itemized plan.</p>
       </div>
       <div class="process-step reveal">
-        <div class="process-num">02</div>
+        <div class="process-num">2</div>
         <h3>Deploy</h3>
         <p>Upgrades, migrations, and security setup happen with minimal disruption to your office.</p>
       </div>
       <div class="process-step reveal">
-        <div class="process-num">03</div>
+        <div class="process-num">3</div>
         <h3>Monitor</h3>
         <p>Ongoing monitoring and support keep things running — with a real person to call when you need one.</p>
       </div>
@@ -392,7 +421,7 @@
   </div>
 </section>
 
-<div class="trust-strip">
+<div class="trust-strip section-light">
   <div class="wrap trust-grid">
     <div class="trust-item reveal">Based in Vancouver, BC</div>
     <div class="trust-item reveal">Flat-rate visits, no surprise bills</div>
