@@ -90,6 +90,7 @@
   header.hero{padding:96px 0 80px;}
   .hero-grid{
     display:grid; grid-template-columns:1.1fr 0.9fr; gap:64px; align-items:center;
+    perspective:1600px;
   }
   .eyebrow{
     font-family:var(--mono); font-size:13px; color:var(--accent);
@@ -117,6 +118,8 @@
     border-radius:8px;
     overflow:hidden;
     box-shadow:0 20px 60px -20px rgba(0,0,0,0.6);
+    transform-style:preserve-3d;
+    will-change:transform;
   }
   .status-panel-head{
     display:flex; align-items:center; justify-content:space-between;
@@ -219,6 +222,26 @@
   footer .foot-links{display:flex; gap:24px; font-size:13px; color:var(--text-dim);}
   footer .foot-links a:hover{color:var(--accent);}
 
+  /* SCROLL-DRIVEN MOTION */
+  .grid-bg{will-change:transform;}
+  @media (prefers-reduced-motion: no-preference){
+    .reveal{
+      opacity:0; transform:translateY(32px);
+      transition:opacity 0.8s cubic-bezier(.16,.84,.44,1), transform 0.8s cubic-bezier(.16,.84,.44,1);
+    }
+    .reveal.in-view{opacity:1; transform:translateY(0);}
+    .service-group.reveal:nth-child(1){transition-delay:0s;}
+    .service-group.reveal:nth-child(2){transition-delay:0.12s;}
+    .service-group.reveal:nth-child(3){transition-delay:0.24s;}
+    .process-step.reveal:nth-child(1){transition-delay:0s;}
+    .process-step.reveal:nth-child(2){transition-delay:0.12s;}
+    .process-step.reveal:nth-child(3){transition-delay:0.24s;}
+    .trust-item.reveal:nth-child(1){transition-delay:0s;}
+    .trust-item.reveal:nth-child(2){transition-delay:0.08s;}
+    .trust-item.reveal:nth-child(3){transition-delay:0.16s;}
+    .trust-item.reveal:nth-child(4){transition-delay:0.24s;}
+  }
+
   @media (max-width:860px){
     .hero-grid{grid-template-columns:1fr; gap:48px;}
     h1{font-size:34px;}
@@ -234,7 +257,7 @@
 
 <nav>
   <div class="wrap">
-    <div class="logo"><span class="logo-dot"></span>NORVANTIX</div>
+    <a href="/" class="logo"><span class="logo-dot"></span>NORVANTIX</a>
     <div class="nav-links">
       <a href="#services">Services</a>
       <a href="#process">How it works</a>
@@ -288,13 +311,13 @@
 
 <section id="services">
   <div class="wrap">
-    <div class="section-head">
+    <div class="section-head reveal">
       <div class="section-eyebrow">What we cover</div>
       <h2>Everything from setup to standby.</h2>
       <p class="section-sub">Three stages, one team — no handoffs between vendors.</p>
     </div>
     <div class="service-groups">
-      <div class="service-group">
+      <div class="service-group reveal">
         <div class="service-group-label">Set up</div>
         <div class="service-item">
           <h3>Windows 11 upgrades</h3>
@@ -309,7 +332,7 @@
           <p>Secure, reliable access for staff working outside the office, multi-monitor included.</p>
         </div>
       </div>
-      <div class="service-group">
+      <div class="service-group reveal">
         <div class="service-group-label">Protect</div>
         <div class="service-item">
           <h3>Cloud backup</h3>
@@ -324,7 +347,7 @@
           <p>Security and system updates applied on schedule, without disrupting your day.</p>
         </div>
       </div>
-      <div class="service-group">
+      <div class="service-group reveal">
         <div class="service-group-label">Support</div>
         <div class="service-item">
           <h3>24/7 system monitoring</h3>
@@ -345,22 +368,22 @@
 
 <section id="process">
   <div class="wrap">
-    <div class="section-head">
+    <div class="section-head reveal">
       <div class="section-eyebrow">How it works</div>
       <h2>Three steps, start to finish.</h2>
     </div>
     <div class="process">
-      <div class="process-step">
+      <div class="process-step reveal">
         <div class="process-num">01</div>
         <h3>Assess</h3>
         <p>We review your current setup — hardware, backups, and network — and quote a clear, itemized plan.</p>
       </div>
-      <div class="process-step">
+      <div class="process-step reveal">
         <div class="process-num">02</div>
         <h3>Deploy</h3>
         <p>Upgrades, migrations, and security setup happen with minimal disruption to your office.</p>
       </div>
-      <div class="process-step">
+      <div class="process-step reveal">
         <div class="process-num">03</div>
         <h3>Monitor</h3>
         <p>Ongoing monitoring and support keep things running — with a real person to call when you need one.</p>
@@ -371,19 +394,19 @@
 
 <div class="trust-strip">
   <div class="wrap trust-grid">
-    <div class="trust-item">Based in Vancouver, BC</div>
-    <div class="trust-item">Flat-rate visits, no surprise bills</div>
-    <div class="trust-item">Same-business-day response</div>
-    <div class="trust-item">Built for small offices, not enterprises</div>
+    <div class="trust-item reveal">Based in Vancouver, BC</div>
+    <div class="trust-item reveal">Flat-rate visits, no surprise bills</div>
+    <div class="trust-item reveal">Same-business-day response</div>
+    <div class="trust-item reveal">Built for small offices, not enterprises</div>
   </div>
 </div>
 
 <section class="cta-section" id="contact">
   <div class="wrap">
-    <div class="section-eyebrow" style="justify-content:center; display:flex;">Get started</div>
-    <h2>Tell us what you're working with.</h2>
-    <p class="section-sub">Send over your setup — number of devices, current backup situation, anything that's been acting up — and we'll put together a straightforward quote.</p>
-    <div class="cta-row">
+    <div class="section-eyebrow reveal" style="justify-content:center; display:flex;">Get started</div>
+    <h2 class="reveal">Tell us what you're working with.</h2>
+    <p class="section-sub reveal">Send over your setup — number of devices, current backup situation, anything that's been acting up — and we'll put together a straightforward quote.</p>
+    <div class="cta-row reveal">
       <a href="mailto:hello@norvantix.com" class="btn">Email hello@norvantix.com</a>
       <a href="#" class="btn btn-ghost">Call for a quote</a>
     </div>
@@ -409,6 +432,65 @@
     i = (i + 1) % messages.length;
     clock.textContent = messages[i];
   }, 4000);
+
+  // Scroll-reveal for sections, cards, and steps
+  const revealEls = document.querySelectorAll('.reveal');
+  if ('IntersectionObserver' in window) {
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('in-view');
+          io.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.15, rootMargin: '0px 0px -60px 0px' });
+    revealEls.forEach(el => io.observe(el));
+  } else {
+    revealEls.forEach(el => el.classList.add('in-view'));
+  }
+
+  // Hero status panel: 3D tilt that responds to scroll (and to the mouse near the top)
+  const heroEl = document.querySelector('.hero');
+  const statusPanel = document.querySelector('.status-panel');
+  const gridBg = document.querySelector('.grid-bg');
+  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  if (!reduceMotion && heroEl && statusPanel) {
+    let ticking = false;
+
+    function updateScrollMotion() {
+      const heroHeight = heroEl.offsetHeight;
+      const progress = Math.min(Math.max(window.scrollY / heroHeight, 0), 1);
+      const rotateY = progress * 18;
+      const rotateX = progress * -10;
+      const translateZ = progress * -60;
+      const scale = 1 - progress * 0.08;
+      statusPanel.style.transform =
+        `perspective(1600px) rotateY(${rotateY}deg) rotateX(${rotateX}deg) translateZ(${translateZ}px) scale(${scale})`;
+      statusPanel.style.opacity = 1 - progress * 0.55;
+      if (gridBg) gridBg.style.transform = `translateY(${window.scrollY * 0.08}px)`;
+      ticking = false;
+    }
+
+    window.addEventListener('scroll', () => {
+      if (!ticking) {
+        requestAnimationFrame(updateScrollMotion);
+        ticking = true;
+      }
+    }, { passive: true });
+    updateScrollMotion();
+
+    statusPanel.addEventListener('mousemove', (e) => {
+      if (window.scrollY > 40) return;
+      const rect = statusPanel.getBoundingClientRect();
+      const x = (e.clientX - rect.left) / rect.width - 0.5;
+      const y = (e.clientY - rect.top) / rect.height - 0.5;
+      statusPanel.style.transform = `perspective(1600px) rotateY(${x * 12}deg) rotateX(${-y * 12}deg)`;
+    });
+    statusPanel.addEventListener('mouseleave', () => {
+      if (window.scrollY <= 40) updateScrollMotion();
+    });
+  }
 </script>
 
 </body>
